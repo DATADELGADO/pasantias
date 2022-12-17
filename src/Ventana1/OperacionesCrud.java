@@ -27,6 +27,27 @@ public class OperacionesCrud {
         return bandera;
     }
 
+    public static List<Usuariosxproducto> mostrarPrestamos(Connection conexion) {
+        List<Usuariosxproducto> prestamos_al = new ArrayList<Usuariosxproducto>();
+        try {
+            String query = "select u.idusuario, u.nombre, u.apellidos, u.dni, p.idproducto, p.nombre, p.marca, p.especificacion, x.fecha, x.cantidadPrestada\n"
+                    + "from usuario u, producto p, usuarios_x_producto x\n"
+                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                prestamos_al.add(new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), Integer.parseInt(rs.getString(10))));
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(5));
+
+            }
+
+        } catch (Exception e) {
+            prestamos_al = null;
+        }
+        return prestamos_al;
+    }
+
     public static List<String> historial(Connection conexion) {
         List<String> historial_al = new ArrayList<String>();
         try {

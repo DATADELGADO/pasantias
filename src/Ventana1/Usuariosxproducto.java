@@ -1,15 +1,24 @@
 package Ventana1;
 
-public class Usuariosxproducto {
-private String idUsuario;
-private String idProducto;
-private String fecha;
-private int cantidadPrestada;
+public class Usuariosxproducto extends Producto {
+
+    private String idUsuario;
+    private String idProducto;
+    private String fecha;
+    private int cantidadPrestada;
 
     public Usuariosxproducto() {
     }
 
     public Usuariosxproducto(String idUsuario, String idProducto, String fecha, int cantidadPrestada) {
+        this.idUsuario = idUsuario;
+        this.idProducto = idProducto;
+        this.fecha = fecha;
+        this.cantidadPrestada = cantidadPrestada;
+    }
+
+    public Usuariosxproducto(String idUsuario, String nombre, String apellidos, String dni, String idProducto, String nombreProducto, String marca, String especificacion, String fecha, int cantidadPrestada) {
+        super(idProducto, nombreProducto, marca, especificacion, idUsuario, nombre, apellidos, dni);
         this.idUsuario = idUsuario;
         this.idProducto = idProducto;
         this.fecha = fecha;

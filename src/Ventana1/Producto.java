@@ -1,9 +1,9 @@
 package Ventana1;
 
-public class Producto {
+public class Producto extends Usuario{
 
     private String idProducto;
-    private String nombre;
+    private String nombreProducto;
     private String marca;
     private String especificacion;
     private int cantidad;
@@ -11,13 +11,22 @@ public class Producto {
     public Producto() {
     }
 
-    public Producto(String idProducto, String nombre, String marca, String especificacion, int cantidad) {
+    public Producto(String idProducto, String nombreProducto, String marca, String especificacion, int cantidad) {
         this.idProducto = idProducto;
-        this.nombre = nombre;
+        this.nombreProducto = nombreProducto;
         this.marca = marca;
         this.especificacion = especificacion;
         this.cantidad = cantidad;
     }
+
+    public Producto(String idProducto, String nombreProducto, String marca, String especificacion, String idUsuario, String nombre, String apellidos, String dni) {
+        super(idUsuario, nombre, apellidos, dni);
+        this.idProducto = idProducto;
+        this.nombreProducto = nombreProducto;
+        this.marca = marca;
+        this.especificacion = especificacion;
+    }
+    
 
     public String getIdProducto() {
         return idProducto;
@@ -27,12 +36,13 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public String getNombre() {
-        return nombre;
+    
+    public String getNombreProducto() {
+        return nombreProducto;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
     }
 
     public String getMarca() {
@@ -61,7 +71,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", marca=" + marca + ", especificacion=" + especificacion + ", cantidad=" + cantidad + '}';
+        return "Producto{" + "idProducto=" + idProducto + ", nombreProducto=" + nombreProducto + ", marca=" + marca + ", especificacion=" + especificacion + ", cantidad=" + cantidad + '}';
     }
     
 }

@@ -25,7 +25,7 @@ public class Prestamo extends javax.swing.JFrame {
             dlm1.addElement(s);
         }
         for (Producto p : OperacionesCrud.mostrarTodoMateriales(VentanaPrincipal.conexion)) {
-            String s = String.format("%-5s%-20s%-20s%-45s%3d\n", p.getIdProducto(), p.getNombre(), p.getMarca(), p.getEspecificacion(), p.getCantidad());
+            String s = String.format("%-5s%-20s%-20s%-45s%3d\n", p.getIdProducto(), p.getNombreProducto(), p.getMarca(), p.getEspecificacion(), p.getCantidad());
             dlm2.addElement(s);
         }
 

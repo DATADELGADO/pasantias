@@ -63,9 +63,18 @@ public class VentanaProductos extends javax.swing.JFrame {
         });
 
         jButton2.setText("ELIMINAR EQUIPO");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("ACTUALIZAR EQUIPO");
-        jButton3.setActionCommand("ACTUALIZAR EQUIPO");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         cmdMostrartodo.setText("MOSTRAR EQUIPOS");
         cmdMostrartodo.addActionListener(new java.awt.event.ActionListener() {
@@ -128,13 +137,21 @@ public class VentanaProductos extends javax.swing.JFrame {
             cargarProductos();
             try {
                 for (Producto p : productos_al) {
-                    String s = String.format("%-15s%-22s%-18s%15s%8d\n", p.getIdProducto(), p.getNombre(), p.getMarca(), p.getEspecificacion(),p.getCantidad());
+                    String s = String.format("%-15s%-22s%-18s%15s%8d\n", p.getIdProducto(), p.getNombreProducto(), p.getMarca(), p.getEspecificacion(),p.getCantidad());
                     dlm.addElement(s);
                 }
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "ERROR: LISTA VACIA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
     }//GEN-LAST:event_cmdMostrartodoActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
