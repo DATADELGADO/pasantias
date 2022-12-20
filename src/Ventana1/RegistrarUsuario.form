@@ -33,7 +33,7 @@
                   <Group type="102" attributes="0">
                       <Component id="jLabel12" min="-2" pref="82" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="txtNombre1" min="-2" pref="245" max="-2" attributes="0"/>
+                      <Component id="txtUsuarioAuto" min="-2" pref="245" max="-2" attributes="0"/>
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
@@ -92,7 +92,7 @@
               <Component id="jLabel2" min="-2" pref="54" max="-2" attributes="0"/>
               <EmptySpace pref="136" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtNombre1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtUsuarioAuto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -230,7 +230,7 @@
         <Property name="text" type="java.lang.String" value="REPITE CONTRASE&#xd1;A"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtNombre1">
+    <Component class="javax.swing.JTextField" name="txtUsuarioAuto">
       <Properties>
         <Property name="enabled" type="boolean" value="false"/>
       </Properties>

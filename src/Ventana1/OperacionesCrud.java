@@ -26,6 +26,51 @@ public class OperacionesCrud {
         return bandera;
     }
 
+    public static boolean insertarLogin(String[] usuario, Connection conexion) {
+        boolean bandera = false;
+        String query = "INSERT INTO login(idusuario, password, correo, ciudad) values(?,?,?,?);";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, usuario[0]);
+            ps.setString(2, usuario[1]);
+            ps.setString(3, usuario[2]);
+            ps.setString(4, usuario[3]);
+
+            ps.execute();
+            bandera = true;
+
+        } catch (SQLException e) {
+            bandera = false;
+        }
+        return bandera;
+    }
+
+    public static String retornaIdusuarioAutomatico(Connection conexion) {
+        String usuarioAuto = "";
+        try {
+            String query = "SELECT IDUSUARIO FROM LOGIN\n"
+                    + "ORDER BY IDUSUARIO DESC\n"
+                    + "LIMIT 1;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String idusuario = rs.getString(1);
+                String numero = "";
+                for (int i = 0; i < idusuario.length(); i++) {
+                    if (i != 0) {
+                        numero = numero + idusuario.charAt(i);
+                    }
+                }
+                int n = Integer.parseInt(numero) + 1;
+                usuarioAuto = "U" + n;
+            }
+
+        } catch (Exception e) {
+
+        }
+        return usuarioAuto;
+    }
+
     public static boolean insertar(Usuario usuario, Connection conexion) {
         boolean bandera = false;
         String query = "INSERT INTO USUARIO(idUsuario,nombre,apellidos,dni) VALUES(?,?,?,?)";
