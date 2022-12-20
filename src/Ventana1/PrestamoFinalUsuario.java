@@ -1,5 +1,6 @@
 package Ventana1;
 
+import java.sql.Connection;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -8,9 +9,9 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.swing.JOptionPane;
 
-public class PrestamoFinal extends javax.swing.JFrame {
-
-    public PrestamoFinal() {
+public class PrestamoFinalUsuario extends javax.swing.JFrame {
+Connection conexion = Ventana_login.conexion;
+    public PrestamoFinalUsuario() {
         initComponents();
         personalizar_JFrame();
         llenarDatos();
@@ -21,24 +22,22 @@ public class PrestamoFinal extends javax.swing.JFrame {
     public void personalizar_JFrame() {
         //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setTitle("ALMACEN");
+        this.setTitle("REALIZANDO PRESTAMO");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
 
     public void llenarDatos() {
         txtIdUsuario.setEnabled(false);
-        txtIdUsuario.setText(Prestamo.ids[0]);
+        txtIdUsuario.setText(VentanaProductosUsuario.ids[0]);
         txtIdProducto.setEnabled(false);
-        txtIdProducto.setText(Prestamo.ids[1]);
+        txtIdProducto.setText(VentanaProductosUsuario.ids[1]);
         //txtFecha.setEnabled(false);
 
         DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
         Calendar fecha = new GregorianCalendar();
 
         txtFecha.setText(formateador.format(fecha.getTime()));
-        System.out.println(fecha.getTime());
-        System.out.println(fecha);
     }
 
     /*
@@ -179,32 +178,32 @@ public class PrestamoFinal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Usuariosxproducto x = new Usuariosxproducto(txtIdUsuario.getText(), txtIdProducto.getText(), txtFecha.getText(), Integer.parseInt(txtCantidad.getText()));
-        int cantidad = OperacionesCrud.comprobarIDS(x, VentanaPrincipal.conexion);//esto es para ver si existe un usuario y un producto repetidos y te devolvera la cantidad que posee ese usuario del producto
+        int cantidad = OperacionesCrud.comprobarIDS(x, conexion);//esto es para ver si existe un usuario y un producto repetidos y te devolvera la cantidad que posee ese usuario del producto
         if (cantidad == 0) {
 
-            if (OperacionesCrud.insertarPrestamo(x, VentanaPrincipal.conexion) == 1) {
+            if (OperacionesCrud.insertarPrestamo(x, conexion) == 1) {
 
                 JOptionPane.showMessageDialog(this, "OK: PRESTAMO REALIZADO CON EXITO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
 
-            } else if (OperacionesCrud.insertarPrestamo(x, VentanaPrincipal.conexion) == -1) {
+            } else if (OperacionesCrud.insertarPrestamo(x, conexion) == -1) {
                 JOptionPane.showMessageDialog(this, "ERROR: EL EQUIPO SELECCIONADO NO TIENE STOCK SUFICIENTE", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-            } else if (OperacionesCrud.insertarPrestamo(x, VentanaPrincipal.conexion) == 0) {
+            } else if (OperacionesCrud.insertarPrestamo(x, conexion) == 0) {
                 JOptionPane.showMessageDialog(this, "ERROR: INSERTAR PRESTAMO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
         } else {
             System.out.println("USUARIO Y PRODUCTO REPETIDO HACER METODO UPDATE");// REALIZAR METODO UPDATE
-            if (OperacionesCrud.actualizarCantidadPrestamo(x, VentanaPrincipal.conexion, cantidad) == 1) {
+            if (OperacionesCrud.actualizarCantidadPrestamo(x, conexion, cantidad) == 1) {
                 JOptionPane.showMessageDialog(this, "OK: ACTUALIZAR CANTIDAD PRESTAMO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
 
-            } else if (OperacionesCrud.actualizarCantidadPrestamo(x, VentanaPrincipal.conexion, cantidad) == -1) {
+            } else if (OperacionesCrud.actualizarCantidadPrestamo(x, conexion, cantidad) == -1) {
                 JOptionPane.showMessageDialog(this, "ERROR: NO HAY STOCK DEL EQUIPO PARA PODER ACTUALIZAR LA CANTIDAD", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-            } else if (OperacionesCrud.actualizarCantidadPrestamo(x, VentanaPrincipal.conexion, cantidad) == 0) {
+            } else if (OperacionesCrud.actualizarCantidadPrestamo(x, conexion, cantidad) == 0) {
                 JOptionPane.showMessageDialog(this, "ERROR: ACTUALIZAR CANTIDAD PRESTAMO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
         }
-        Prestamo.cargarListas();
+        VentanaProductosUsuario.cargarProductos();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -224,20 +223,21 @@ public class PrestamoFinal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PrestamoFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoFinalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PrestamoFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoFinalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PrestamoFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoFinalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PrestamoFinal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PrestamoFinalUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrestamoFinal().setVisible(true);
+                new PrestamoFinalUsuario().setVisible(true);
             }
         });
     }

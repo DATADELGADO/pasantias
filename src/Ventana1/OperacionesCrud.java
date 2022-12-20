@@ -9,6 +9,23 @@ import java.util.ArrayList;
 
 public class OperacionesCrud {
 
+    public static boolean login(String[] usuario, Connection conexion) {
+        boolean bandera = false;
+        try {
+            String query = "select * from login where idusuario = ? and password = ?;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, usuario[0]);
+            ps.setString(2, usuario[1]);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                bandera = true;
+            }
+        } catch (Exception e) {
+            bandera = false;
+        }
+        return bandera;
+    }
+
     public static boolean insertar(Usuario usuario, Connection conexion) {
         boolean bandera = false;
         String query = "INSERT INTO USUARIO(idUsuario,nombre,apellidos,dni) VALUES(?,?,?,?)";
@@ -34,6 +51,28 @@ public class OperacionesCrud {
                     + "from usuario u, producto p, usuarios_x_producto x\n"
                     + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0;";
             PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                prestamos_al.add(new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), Integer.parseInt(rs.getString(10))));
+                System.out.println(rs.getString(1));
+                System.out.println(rs.getString(5));
+
+            }
+
+        } catch (Exception e) {
+            prestamos_al = null;
+        }
+        return prestamos_al;
+    }
+
+    public static List<Usuariosxproducto> mostrarPrestamosBuscar(Connection conexion, String busqueda) {
+        List<Usuariosxproducto> prestamos_al = new ArrayList<Usuariosxproducto>();
+        try {
+            String query = "select u.idusuario, u.nombre, u.apellidos, u.dni, p.idproducto, p.nombre, p.marca, p.especificacion, x.fecha, x.cantidadPrestada\n"
+                    + "from usuario u, producto p, usuarios_x_producto x\n"
+                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0 and u.nombre = ?;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, busqueda);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 prestamos_al.add(new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), Integer.parseInt(rs.getString(10))));

@@ -131,10 +131,10 @@ public class Ventana_usuarioInsertar extends javax.swing.JFrame {
 
             Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombre.getText(), txtApellidos.getText(), txtDni.getText());
             if (OperacionesCrud.insertar(usuario, VentanaPrincipal.conexion)) {
-                JOptionPane.showMessageDialog(this, "OK: INSERTAR ALUMNO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "OK: INSERTAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
 
             } else {
-                JOptionPane.showMessageDialog(this, "ERROR: INSERTAR ALUMNO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "ERROR: INSERTAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
 
     }//GEN-LAST:event_cmdRegistrarActionPerformed

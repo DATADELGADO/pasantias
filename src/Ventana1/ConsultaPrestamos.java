@@ -4,21 +4,29 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 
 public class ConsultaPrestamos extends javax.swing.JFrame {
-    
+
     DefaultListModel dlm = new DefaultListModel();
-    
+
     public ConsultaPrestamos() {
         initComponents();
         personalizar_JFrame();
         lstPrestamos.setModel(dlm);
     }
-    
+
     public void personalizar_JFrame() {
         //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setTitle("ALMACEN");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+    }
+
+    public void mostrar(List<Usuariosxproducto> prestamos_al) {
+        dlm.clear();
+        for (Usuariosxproducto x : prestamos_al) {
+            String s = String.format("%-15s%-20s%-30s%-15s%-15s%-20s%-20s%-35s%-15s%5d\n", x.getIdUsuario(), x.getNombre(), x.getApellidos(), x.getDni(), x.getIdProducto(), x.getNombreProducto(), x.getMarca(), x.getEspecificacion(), x.getFecha(), x.getCantidadPrestada());
+            dlm.addElement(s);
+        }
     }
 
     /**
@@ -47,6 +55,11 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         jLabel1.setOpaque(true);
 
         txtNombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("NOMBRE DE USUARIO: ");
 
@@ -71,21 +84,22 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1551, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(80, 80, 80)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1381, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(337, 337, 337)
+                        .addGap(417, 417, 417)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addComponent(jButton1)
                         .addGap(96, 96, 96)
-                        .addComponent(jButton2)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jButton2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1551, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,22 +120,18 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        /*
-        List<Usuariosxproducto> prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
-        for(Usuariosxproducto x : prestamos_al){
-            String s = String.format("%-10s%-20s%-30s%-15s%-10s%-20s%-20s%-35s%-15s%5d\n", x.getIdUsuario(),x.getNombre(), x.getApellidos(),x.getDni(),x.getIdProducto(),x.getNombreProducto(),x.getMarca(),x.getEspecificacion(),x.getFecha(),x.getCantidadPrestada());
-            dlm.addElement(s);
-        }
-        */
+        List<Usuariosxproducto> prestamos_al = OperacionesCrud.mostrarPrestamosBuscar(VentanaPrincipal.conexion, txtNombre.getText());
+        mostrar(prestamos_al);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         List<Usuariosxproducto> prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
-        for(Usuariosxproducto x : prestamos_al){
-            String s = String.format("%-15s%-20s%-30s%-15s%-15s%-20s%-20s%-35s%-15s%5d\n", x.getIdUsuario(),x.getNombre(), x.getApellidos(),x.getDni(),x.getIdProducto(),x.getNombreProducto(),x.getMarca(),x.getEspecificacion(),x.getFecha(),x.getCantidadPrestada());
-            dlm.addElement(s);
-        }
+        mostrar(prestamos_al);
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments
