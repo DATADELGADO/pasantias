@@ -4,6 +4,8 @@
  */
 package Ventana1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author delga
@@ -134,7 +136,7 @@ public class Ventana_usuarioActualizar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistrarActionPerformed
-
+//HACER METODO ACTUALIZAR AQUI Y EN PRODUCTO
         Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombre.getText(), txtApellidos.getText(), txtDni.getText());
         if (OperacionesCrud.insertar(usuario, VentanaPrincipal.conexion)) {
             JOptionPane.showMessageDialog(this, "USUARIO INSERTADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
