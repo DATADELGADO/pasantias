@@ -1,5 +1,6 @@
 package Ventana1;
 
+import java.awt.Color;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -25,6 +26,8 @@ public class Ventana_login extends javax.swing.JFrame {
         this.setTitle("ALMACEN");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.CYAN);
+
     }
 
     /**

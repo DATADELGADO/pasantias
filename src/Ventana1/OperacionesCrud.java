@@ -89,6 +89,25 @@ public class OperacionesCrud {
         return bandera;
     }
 
+    public static boolean insertarEquipo(Producto producto, Connection conexion) {
+        boolean bandera = false;
+        String query = "INSERT INTO PRODUCTO(idProducto,nombre,marca,especificacion,cantidad) VALUES(?,?,?,?,?)";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, producto.getIdProducto());
+            ps.setString(2, producto.getNombre());
+            ps.setString(3, producto.getMarca());
+            ps.setString(4, producto.getEspecificacion());
+            ps.setInt(5, producto.getCantidad());
+            ps.execute();
+            bandera = true;
+
+        } catch (SQLException e) {
+            bandera = false;
+        }
+        return bandera;
+    }
+
     public static List<Usuariosxproducto> mostrarPrestamos(Connection conexion) {
         List<Usuariosxproducto> prestamos_al = new ArrayList<Usuariosxproducto>();
         try {
@@ -171,6 +190,19 @@ public class OperacionesCrud {
     public static boolean eliminarUsuario(Connection conexion, String id) {
         boolean bandera = false;
         String query = "DELETE FROM USUARIO WHERE idUsuario = ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, id);
+            ps.executeUpdate();
+            bandera = true;
+        } catch (SQLException e) {
+            bandera = false;
+        }
+        return bandera;
+    }
+      public static boolean eliminarProducto(Connection conexion, String id) {
+        boolean bandera = false;
+        String query = "DELETE FROM PRODUCTO WHERE idProducto = ?";
         try {
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setString(1, id);

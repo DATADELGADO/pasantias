@@ -1,5 +1,6 @@
 package Ventana1;
 
+import java.awt.Color;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 
@@ -19,6 +20,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         this.setTitle("ALMACEN");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.CYAN);
+
     }
 
     public void nuevoUsuario() {
@@ -198,16 +201,17 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         String ciudad = txtCiudad.getText().toUpperCase().trim().replaceAll("\\s+", " ");
         if (nombre.matches("[A-ZÑ\\s]+")
                 && apellidos.matches("[A-ZÑ\\s]+")
-                && dni.matches("[1-9A-ZÑ]+")
-                && correo.matches("[\\+A-ZÑ1-9\\._-]+")
-                && contrasena.matches("[a-zA-Z0-9\\+.*@-]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
-                && recontrasena.matches("[a-zA-ZñÑ0-9\\+.*@-]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
+                && dni.matches("[a-zA-ZÑñ0-9]+")
+                && correo.matches("[\\+A-ZÑ0-9\\._-]+(@[A-ZÑ]+)(\\.COM)")
+                && contrasena.matches("[([a-zA-ZñÑ])&&([0-9])&&([\\-_+.*@])]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
+                && recontrasena.matches("[([a-zA-ZñÑ])&&([0-9])&&([\\-_+.*@])]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
                 && ciudad.matches("[A-ZÑ\\s]+")) {
             if (contrasena.equalsIgnoreCase(recontrasena)) {
-                Usuario usuario = new Usuario(txtUsuarioAuto.getText(), txtNombre.getText(), txtApellidos.getText(), txtDni.getText());
-                String[] usuario_login = {txtUsuarioAuto.getText(), txtContrasena.getText(), txtCorreo.getText(), txtCiudad.getText()};
+                Usuario usuario = new Usuario(txtUsuarioAuto.getText(), nombre, apellidos, dni);
+                String[] usuario_login = {txtUsuarioAuto.getText(), contrasena, correo, ciudad};
                 if (OperacionesCrud.insertar(usuario, conexion) && OperacionesCrud.insertarLogin(usuario_login, conexion)) {
                     JOptionPane.showMessageDialog(this, "USUARIO CREADO CORRECTAMENTE", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                    this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "ERROR: CREAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 }
@@ -223,16 +227,16 @@ public class RegistrarUsuario extends javax.swing.JFrame {
             if (!apellidos.matches("[A-ZÑ\\s]+")) {
                 mensaje = mensaje + "  (APELLIDOS)";
             }
-            if (!dni.matches("[1-9A-ZÑ]+")) {
+            if (!dni.matches("[a-zA-ZÑñ0-9]+")) {
                 mensaje = mensaje + "  (DNI)";
             }
-            if (!correo.matches("[\\+A-ZÑ1-9\\._-]+")) {
+            if (!correo.matches("[\\+A-ZÑ0-9\\._-]+(@[A-ZÑ]+)(\\.COM)")) {
                 mensaje = mensaje + "  (CORREO)";
             }
-            if (!contrasena.matches("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/")) {
-                mensaje = mensaje + "  (CONTRASEÑA: DEBE CONTENER ENTRE 8 Y 15 CARACTERES FORMADOS POR NUMEROS, LETRAS, +-*.@)";
+            if (!contrasena.matches("[([a-zA-ZñÑ])|1([0-9])||([\\-_+.*@])]{8,15}")) {
+                mensaje = mensaje + "  (CONTRASEÑA: DEBE CONTENER ENTRE 8 Y 15 CARACTERES FORMADOS POR NUMEROS, LETRAS, -_+.*@)";
             }
-            if (!recontrasena.matches("/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/")) {
+            if (!recontrasena.matches("[([a-zA-ZñÑ])|1([0-9])||([\\-_+.*@])]{8,15}")) {
                 mensaje = mensaje + "  (REPETIR CONTRASEÑA)";
             }
             if (!ciudad.matches("[A-ZÑ\\s]+")) {

@@ -1,5 +1,6 @@
 package Ventana1;
 
+import java.awt.Color;
 import java.awt.Toolkit;
 import java.sql.Connection;
 
@@ -13,6 +14,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         conexion();
     }
 // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/
+
     public void conexion() {
         ConexionMYSQL cms = new ConexionMYSQL("almacen");
         conexion = cms.getConexion();
@@ -24,6 +26,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setTitle("ALMACEN");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.CYAN);
+
     }
 
     @SuppressWarnings("unchecked")

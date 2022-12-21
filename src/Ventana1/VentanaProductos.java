@@ -4,6 +4,7 @@ import static Ventana1.VentanaUsuarios.conexion;
 import static Ventana1.VentanaUsuarios.usuarios_al;
 import java.sql.Connection;
 import java.util.List;
+import java.awt.Color;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -11,7 +12,7 @@ public class VentanaProductos extends javax.swing.JFrame {
 
     static Connection conexion = VentanaPrincipal.conexion;
     DefaultListModel dlm = new DefaultListModel();
-    static List<Producto> productos_al =  OperacionesCrud.mostrarTodoMateriales(conexion);
+    static List<Producto> productos_al = OperacionesCrud.mostrarTodoMateriales(conexion);
 
     public VentanaProductos() {
         initComponents();
@@ -28,6 +29,7 @@ public class VentanaProductos extends javax.swing.JFrame {
         this.setTitle("PRODUCTOS");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        this.getContentPane().setBackground(Color.BLUE);
     }
 
     public void cargarProductos() {
@@ -92,61 +94,80 @@ public class VentanaProductos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 1059, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(74, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmdMostrartodo)
+                .addGap(455, 455, 455))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(223, 223, 223)
                         .addComponent(jButton1)
                         .addGap(46, 46, 46)
                         .addComponent(jButton2)
                         .addGap(50, 50, 50)
-                        .addComponent(jButton3)
-                        .addGap(12, 12, 12))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(cmdMostrartodo)
-                        .addGap(215, 215, 215)))
-                .addGap(84, 84, 84))
+                        .addComponent(jButton3))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 851, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(48, 48, 48)
                 .addComponent(cmdMostrartodo)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Ventana_usuarioInsertar().setVisible(true);
+        new Ventana_productoInsertar().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void cmdMostrartodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMostrartodoActionPerformed
-        
-            cargarProductos();
-            try {
-                for (Producto p : productos_al) {
-                    String s = String.format("%-15s%-22s%-18s%15s%8d\n", p.getIdProducto(), p.getNombreProducto(), p.getMarca(), p.getEspecificacion(),p.getCantidad());
-                    dlm.addElement(s);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "ERROR: LISTA VACIA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+        cargarProductos();
+        try {
+            for (Producto p : productos_al) {
+                String s = String.format("%-15s%-22s%-18s%15s%8d\n", p.getIdProducto(), p.getNombreProducto(), p.getMarca(), p.getEspecificacion(), p.getCantidad());
+                dlm.addElement(s);
             }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ERROR: LISTA VACIA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_cmdMostrartodoActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        int[] indices = lstProductos.getSelectedIndices();
+        boolean bandera = false;
+        int contador = 0;
+        for (int i : indices) {
+            String[] campo = dlm.get(i).toString().replaceAll("[\\s]+", " ").trim().split(" ");
+            if (OperacionesCrud.eliminarProducto(conexion, campo[0])) {
+                bandera = true;
+                dlm.removeElementAt(i);
+                contador++;
+            } else {
+                JOptionPane.showMessageDialog(this, "ERROR: ELIMINAR, ESTE PRODUCTO TIENE EQUIPOS PRESTADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+            }
+        }
+        if (bandera) {
+            JOptionPane.showMessageDialog(this, "ELIMINADO/S " + contador + " PRODUCTO/S", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
