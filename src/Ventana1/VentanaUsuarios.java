@@ -34,6 +34,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
     }
 
     public void cargarUsuarios() {
+        dlm.clear();
         usuarios_al = OperacionesCrud.mostrarTodo(conexion);
     }
 
@@ -190,7 +191,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        if (conexion != null) {
+
             cargarUsuarios();
             try {
                 for (Usuario u : usuarios_al) {
@@ -200,10 +201,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(this, "ERROR: LISTA VACIA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
-        } else {
-            JOptionPane.showMessageDialog(this, "ERROR: CONEXION MYSQL", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-
-        }
+      
 
     }//GEN-LAST:event_jButton5ActionPerformed
 

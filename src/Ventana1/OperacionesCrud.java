@@ -230,6 +230,39 @@ public class OperacionesCrud {
         return productos_al;
     }
 
+    public static Object[] actualizarPrestamo(Usuariosxproducto x, Connection conexion, int cantidad) {
+        boolean bandera = false;
+        int s = x.getCantidadPrestada() - cantidad;
+        try {
+            String query = "UPDATE usuarios_x_producto set cantidadPrestada = cantidadPrestada - ? where idproducto = ? and idusuario = ?;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, cantidad);
+            ps.setString(2, x.getIdProducto());
+            ps.setString(3, x.getIdUsuario());
+            ps.executeUpdate();
+            bandera = true;
+        } catch (Exception e) {
+            bandera = false;
+        }
+        Object[] c = {bandera, s};
+        return c;
+    }
+
+    public static boolean eliminarPrestamo(Usuariosxproducto x, Connection conexion) {
+        boolean bandera = false;
+        String query = "DELETE FROM usuarios_x_producto WHERE idUsuario = ? and idProducto = ?";
+        try {
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, x.getIdUsuario());
+            ps.setString(2, x.getIdProducto());
+            ps.executeUpdate();
+            bandera = true;
+        } catch (SQLException e) {
+            bandera = false;
+        }
+        return bandera;
+    }
+
     public static boolean comprobarStock(Usuariosxproducto x, Connection conexion) {
         boolean bandera = false;
         try {
@@ -380,5 +413,24 @@ public class OperacionesCrud {
             bandera = false;
         }
         return bandera;
+    }
+
+    public static Usuariosxproducto consultaPrestamo(String iu, String ip, Connection conexion) {
+        Usuariosxproducto u = null;
+
+        try {
+            String query = "Select * from usuarios_x_producto where idUsuario = ? and idProducto = ?;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, iu);
+            ps.setString(2, ip);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                u = new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getInt(4));
+            }
+
+        } catch (Exception e) {
+            u = null;
+        }
+        return u;
     }
 }

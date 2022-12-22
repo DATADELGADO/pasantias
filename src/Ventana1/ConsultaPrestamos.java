@@ -2,10 +2,13 @@ package Ventana1;
 
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class ConsultaPrestamos extends javax.swing.JFrame {
 
     DefaultListModel dlm = new DefaultListModel();
+    public static Usuariosxproducto usuario = null;
+    List<Usuariosxproducto> prestamos_al = null;
 
     public ConsultaPrestamos() {
         initComponents();
@@ -45,6 +48,7 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPrestamos = new javax.swing.JList<>();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,6 +84,13 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("DEVOLUCION DE EQUIPOS");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -98,7 +109,10 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
                         .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1551, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1551, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(676, 676, 676)
+                        .addComponent(jButton3)))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,7 +127,9 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
                     .addComponent(jButton2))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 173, Short.MAX_VALUE))
+                .addGap(33, 33, 33)
+                .addComponent(jButton3)
+                .addGap(0, 115, Short.MAX_VALUE))
         );
 
         pack();
@@ -125,13 +141,23 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        List<Usuariosxproducto> prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
+        prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
         mostrar(prestamos_al);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
 
     }//GEN-LAST:event_txtNombreActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        int indice = lstPrestamos.getSelectedIndex();
+        usuario = prestamos_al.get(indice);
+        if (usuario != null) {
+            new DevolucionEquipo().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "ERROR: SELECCIONE UN ELEMENTO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,6 +197,7 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

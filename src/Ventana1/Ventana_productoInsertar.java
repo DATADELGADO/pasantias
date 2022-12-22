@@ -1,17 +1,22 @@
-
 package Ventana1;
 
 import javax.swing.JOptionPane;
 
-
 public class Ventana_productoInsertar extends javax.swing.JFrame {
 
-    
     public Ventana_productoInsertar() {
         initComponents();
+        personalizar_JFrame();
     }
 
-   
+    public void personalizar_JFrame() {
+        //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setTitle("ACTUALIZANDO USUARIO");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

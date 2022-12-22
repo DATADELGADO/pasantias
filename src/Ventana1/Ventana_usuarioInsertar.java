@@ -4,18 +4,27 @@ import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 public class Ventana_usuarioInsertar extends javax.swing.JFrame {
-
+    
     public Ventana_usuarioInsertar() {
         initComponents();
         personalizar_JFrame();
     }
- public void personalizar_JFrame() {
+    
+    public void personalizar_JFrame() {
         //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setTitle("ALMACEN");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
+    
+    public void limpiar() {
+        txtIdUsuario.setText("");
+        txtNombre.setText("");
+        txtApellidos.setText("");
+        txtDni.setText("");
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -128,17 +137,17 @@ public class Ventana_usuarioInsertar extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistrarActionPerformed
-
-            Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombre.getText(), txtApellidos.getText(), txtDni.getText());
-            if (OperacionesCrud.insertar(usuario, VentanaPrincipal.conexion)) {
-                JOptionPane.showMessageDialog(this, "USUARIO INSERTADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-
-            } else {
-                JOptionPane.showMessageDialog(this, "ERROR: INSERTAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-            }
+        
+        Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombre.getText(), txtApellidos.getText(), txtDni.getText());
+        if (OperacionesCrud.insertar(usuario, VentanaPrincipal.conexion)) {
+            JOptionPane.showMessageDialog(this, "USUARIO INSERTADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            limpiar();
+        } else {
+            JOptionPane.showMessageDialog(this, "ERROR: INSERTAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
 
     }//GEN-LAST:event_cmdRegistrarActionPerformed
-
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
