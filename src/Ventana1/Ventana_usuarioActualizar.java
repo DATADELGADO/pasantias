@@ -1,17 +1,23 @@
-
 package Ventana1;
 
 import javax.swing.JOptionPane;
 
-
 public class Ventana_usuarioActualizar extends javax.swing.JFrame {
 
-  
     public Ventana_usuarioActualizar() {
         initComponents();
+        txtIdUsuario.setText(VentanaUsuarios.idUsuario);
+        personalizar_JFrame();
     }
 
-   
+    public void personalizar_JFrame() {
+        //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setTitle("ACTUALIZANDO USUARIO");
+        this.setLocationRelativeTo(null);
+        this.setResizable(false);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -128,11 +134,11 @@ public class Ventana_usuarioActualizar extends javax.swing.JFrame {
     private void cmdActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdActualizarActionPerformed
 //HACER METODO ACTUALIZAR AQUI Y EN PRODUCTO
         Usuario usuario = new Usuario(txtIdUsuario.getText(), txtNombre.getText(), txtApellidos.getText(), txtDni.getText());
-        if (OperacionesCrud.insertar(usuario, VentanaPrincipal.conexion)) {
-            JOptionPane.showMessageDialog(this, "USUARIO INSERTADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-
+        if (OperacionesCrud.actualizarUsuario(usuario, VentanaPrincipal.conexion)) {
+            JOptionPane.showMessageDialog(this, "USUARIO ACTUALIZADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose();
         } else {
-            JOptionPane.showMessageDialog(this, "ERROR: INSERTAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, "ERROR: ACTUALIZAR USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_cmdActualizarActionPerformed
 

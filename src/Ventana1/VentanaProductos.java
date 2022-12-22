@@ -1,6 +1,7 @@
 package Ventana1;
 
 import static Ventana1.VentanaUsuarios.conexion;
+import static Ventana1.VentanaUsuarios.idUsuario;
 import static Ventana1.VentanaUsuarios.usuarios_al;
 import java.sql.Connection;
 import java.util.List;
@@ -13,6 +14,7 @@ public class VentanaProductos extends javax.swing.JFrame {
     static Connection conexion = VentanaPrincipal.conexion;
     DefaultListModel dlm = new DefaultListModel();
     static List<Producto> productos_al = OperacionesCrud.mostrarTodoMateriales(conexion);
+    static String idProducto = "";
 
     public VentanaProductos() {
         initComponents();
@@ -171,7 +173,10 @@ public class VentanaProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        int indice = lstProductos.getSelectedIndex();
+        String[] campo = dlm.get(indice).toString().replaceAll("[\\s]+", " ").trim().split(" ");
+        idProducto = campo[0];
+        new Ventana_productoActualizar().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

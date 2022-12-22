@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 
 public class PrestamoFinalUsuario extends javax.swing.JFrame {
 Connection conexion = Ventana_login.conexion;
+
+
     public PrestamoFinalUsuario() {
         initComponents();
         personalizar_JFrame();

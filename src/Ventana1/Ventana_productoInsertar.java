@@ -106,7 +106,7 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(571, 571, 571)
                         .addComponent(cmdRegistrar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

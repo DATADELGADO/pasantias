@@ -200,7 +200,8 @@ public class OperacionesCrud {
         }
         return bandera;
     }
-      public static boolean eliminarProducto(Connection conexion, String id) {
+
+    public static boolean eliminarProducto(Connection conexion, String id) {
         boolean bandera = false;
         String query = "DELETE FROM PRODUCTO WHERE idProducto = ?";
         try {
@@ -324,6 +325,59 @@ public class OperacionesCrud {
             }
         } catch (Exception e) {
             bandera = 0;
+        }
+        return bandera;
+    }
+
+    public static String busquedaUsuario(String busqueda, Connection conexion) {
+        String nombre = "";
+
+        try {
+            String query = "Select nombre, apellidos from usuario where idUsuario = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, busqueda);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                nombre = rs.getString(1) + " " + rs.getString(2);
+            }
+
+        } catch (Exception e) {
+
+        }
+        return nombre;
+    }
+
+    public static boolean actualizarUsuario(Usuario x, Connection conexion) {
+        boolean bandera = false;
+        try {
+            String query = "UPDATE usuario set nombre = ?, apellidos = ?, dni = ? where idUsuario = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, x.getNombre());
+            ps.setString(2, x.getApellidos());
+            ps.setString(3, x.getDni());
+            ps.setString(4, x.getIdUsuario());
+            ps.executeUpdate();
+            bandera = true;
+        } catch (Exception e) {
+            bandera = false;
+        }
+        return bandera;
+    }
+
+    public static boolean actualizarEquipo(Producto x, Connection conexion) {
+        boolean bandera = false;
+        try {
+            String query = "UPDATE producto set nombre = ?, marca = ?, especificacion = ?, cantidad = ? where idProducto = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, x.getNombreProducto());
+            ps.setString(2, x.getMarca());
+            ps.setString(3, x.getEspecificacion());
+            ps.setInt(4, x.getCantidad());
+            ps.setString(5, x.getIdProducto());
+            ps.executeUpdate();
+            bandera = true;
+        } catch (Exception e) {
+            bandera = false;
         }
         return bandera;
     }

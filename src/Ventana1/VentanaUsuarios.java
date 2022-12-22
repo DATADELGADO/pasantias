@@ -12,6 +12,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
     static Connection conexion = VentanaPrincipal.conexion;
     DefaultListModel dlm = new DefaultListModel();
     static List<Usuario> usuarios_al = OperacionesCrud.mostrarTodo(conexion);
+    static String idUsuario = "";
 
     public VentanaUsuarios() {
         initComponents();
@@ -229,7 +230,10 @@ public class VentanaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        int indice = lstUsuarios.getSelectedIndex();
+        String[] campo = dlm.get(indice).toString().replaceAll("[\\s]+", " ").trim().split(" ");
+        idUsuario = campo[0];
+        new Ventana_usuarioActualizar().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
