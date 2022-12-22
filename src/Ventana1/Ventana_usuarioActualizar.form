@@ -61,7 +61,7 @@
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="348" max="-2" attributes="0"/>
-              <Component id="cmdRegistrar" min="-2" max="-2" attributes="0"/>
+              <Component id="cmdActualizar" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -85,7 +85,7 @@
                   <Component id="txtDni" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-              <Component id="cmdRegistrar" min="-2" max="-2" attributes="0"/>
+              <Component id="cmdActualizar" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="68" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -94,15 +94,15 @@
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtApellidos">
     </Component>
-    <Component class="javax.swing.JButton" name="cmdRegistrar">
+    <Component class="javax.swing.JButton" name="cmdActualizar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="ff" red="33" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="REGISTRAR USUARIO"/>
+        <Property name="text" type="java.lang.String" value="ACTUALIZAR USUARIO"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdRegistrarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdActualizarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -119,6 +119,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIdUsuario">
+      <Properties>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

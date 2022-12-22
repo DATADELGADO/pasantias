@@ -45,12 +45,14 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
-        txtContrasena = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtRecontrasena = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtUsuarioAuto = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        boxMostrarB = new javax.swing.JCheckBox();
+        boxMostrarA = new javax.swing.JCheckBox();
+        txtRecontrasena = new javax.swing.JPasswordField();
+        txtContrasena = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +93,20 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
         jLabel12.setText("ID USUARIO");
 
+        boxMostrarB.setText("MOSTRAR");
+        boxMostrarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxMostrarBActionPerformed(evt);
+            }
+        });
+
+        boxMostrarA.setText("MOSTRAR");
+        boxMostrarA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxMostrarAActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,16 +140,18 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel11)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtRecontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtCiudad, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtApellidos, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                .addComponent(txtDni, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                .addComponent(txtCiudad, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
+                                .addComponent(txtRecontrasena)
+                                .addComponent(txtContrasena, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(boxMostrarB)
+                    .addComponent(boxMostrarA))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -165,15 +183,17 @@ public class RegistrarUsuario extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
-                        .addGap(26, 26, 26)
+                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addGap(26, 26, 26)
+                            .addComponent(jLabel10)
+                            .addComponent(boxMostrarA)
+                            .addComponent(txtContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtRecontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addGap(29, 29, 29)
+                            .addComponent(jLabel11)
+                            .addComponent(boxMostrarB)
+                            .addComponent(txtRecontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCiudad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9)))
@@ -196,16 +216,17 @@ public class RegistrarUsuario extends javax.swing.JFrame {
         String apellidos = txtApellidos.getText().toUpperCase().trim().replaceAll("\\s+", " ");
         String dni = txtDni.getText().toUpperCase().trim().replaceAll("\\s+", "");
         String correo = txtCorreo.getText().toUpperCase().trim().replaceAll("\\s+", "");
-        String contrasena = txtContrasena.getText().trim().replaceAll("\\s+", "");
-        String recontrasena = txtRecontrasena.getText().trim().replaceAll("\\s+", "");
+        String contrasena = String.valueOf(txtContrasena.getPassword()).trim().replaceAll("\\s+", "");
+        String recontrasena = String.valueOf(txtRecontrasena.getPassword()).trim().replaceAll("\\s+", "");
         String ciudad = txtCiudad.getText().toUpperCase().trim().replaceAll("\\s+", " ");
-        if (nombre.matches("[A-ZÑ\\s]+")
-                && apellidos.matches("[A-ZÑ\\s]+")
+        System.out.println(contrasena + "    " + recontrasena);
+        if (nombre.matches("[a-zA-ZÑ\\s]+")
+                && apellidos.matches("[a-zA-ZÑ\\s]+")
                 && dni.matches("[a-zA-ZÑñ0-9]+")
-                && correo.matches("[\\+A-ZÑ0-9\\._-]+(@[A-ZÑ]+)(\\.COM)")
-                && contrasena.matches("[([a-zA-ZñÑ])&&([0-9])&&([\\-_+.*@])]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
-                && recontrasena.matches("[([a-zA-ZñÑ])&&([0-9])&&([\\-_+.*@])]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
-                && ciudad.matches("[A-ZÑ\\s]+")) {
+                && correo.matches("[\\+a-zA-ZÑ0-9\\._-]+(@[A-ZÑ]+)(\\.COM)")
+                && contrasena.matches("[([a-zA-ZñÑ])||([0-9])||([\\-_+.*@])]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
+                && recontrasena.matches("[([a-zA-ZñÑ])||([0-9])||([\\-_+.*@])]{8,15}") //"/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,15}$/"
+                && ciudad.matches("[a-zA-ZÑ\\s]+")) {
             if (contrasena.equalsIgnoreCase(recontrasena)) {
                 Usuario usuario = new Usuario(txtUsuarioAuto.getText(), nombre, apellidos, dni);
                 String[] usuario_login = {txtUsuarioAuto.getText(), contrasena, correo, ciudad};
@@ -221,30 +242,46 @@ public class RegistrarUsuario extends javax.swing.JFrame {
 
         } else {
             String mensaje = "ERROR EN LOS CAMPOS: ";
-            if (!nombre.matches("[A-ZÑ\\s]+")) {
+            if (!nombre.matches("[a-zA-ZÑ\\s]+")) {
                 mensaje = mensaje + "  (NOMBRE)";
             }
-            if (!apellidos.matches("[A-ZÑ\\s]+")) {
+            if (!apellidos.matches("[a-zA-ZÑ\\s]+")) {
                 mensaje = mensaje + "  (APELLIDOS)";
             }
             if (!dni.matches("[a-zA-ZÑñ0-9]+")) {
                 mensaje = mensaje + "  (DNI)";
             }
-            if (!correo.matches("[\\+A-ZÑ0-9\\._-]+(@[A-ZÑ]+)(\\.COM)")) {
+            if (!correo.matches("[\\+a-zA-ZÑ0-9\\._-]+(@[A-ZÑ]+)(\\.COM)")) {
                 mensaje = mensaje + "  (CORREO)";
             }
-            if (!contrasena.matches("[([a-zA-ZñÑ])|1([0-9])||([\\-_+.*@])]{8,15}")) {
+            if (!contrasena.matches("[([a-zA-ZñÑ])||([0-9])||([\\-_+.*@])]{8,15}")) {
                 mensaje = mensaje + "  (CONTRASEÑA: DEBE CONTENER ENTRE 8 Y 15 CARACTERES FORMADOS POR NUMEROS, LETRAS, -_+.*@)";
             }
-            if (!recontrasena.matches("[([a-zA-ZñÑ])|1([0-9])||([\\-_+.*@])]{8,15}")) {
+            if (!recontrasena.matches("[([a-zA-ZñÑ])||([0-9])||([\\-_+.*@])]{8,15}")) {
                 mensaje = mensaje + "  (REPETIR CONTRASEÑA)";
             }
-            if (!ciudad.matches("[A-ZÑ\\s]+")) {
+            if (!ciudad.matches("[a-zA-ZÑ\\s]+")) {
                 mensaje = mensaje + "  (CIUDAD)";
             }
             JOptionPane.showMessageDialog(this, mensaje, "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void boxMostrarAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxMostrarAActionPerformed
+        if(boxMostrarA.isSelected()){
+          txtContrasena.setEchoChar((char)0);
+        }else{
+            txtContrasena.setEchoChar('*');
+        }
+    }//GEN-LAST:event_boxMostrarAActionPerformed
+
+    private void boxMostrarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxMostrarBActionPerformed
+        if(boxMostrarB.isSelected()){
+          txtRecontrasena.setEchoChar((char)0);
+        }else{
+            txtRecontrasena.setEchoChar('*');
+        }
+    }//GEN-LAST:event_boxMostrarBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -282,6 +319,8 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox boxMostrarA;
+    private javax.swing.JCheckBox boxMostrarB;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -295,11 +334,11 @@ public class RegistrarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtCiudad;
-    private javax.swing.JTextField txtContrasena;
+    private javax.swing.JPasswordField txtContrasena;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDni;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRecontrasena;
+    private javax.swing.JPasswordField txtRecontrasena;
     private javax.swing.JTextField txtUsuarioAuto;
     // End of variables declaration//GEN-END:variables
 }
