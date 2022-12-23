@@ -9,16 +9,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DevolucionEquipo extends javax.swing.JFrame {
-    
+
     static Usuariosxproducto u = null;
     Connection conexion = Ventana_login.conexion;
-    
+
     public DevolucionEquipo() {
         initComponents();
         personalizar_JFrame();
         cargarCampos();
     }
-    
+
     public void cargarCampos() {
         u = ConsultaPrestamos.usuario;
         DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
@@ -27,9 +27,9 @@ public class DevolucionEquipo extends javax.swing.JFrame {
         txtIdProducto.setText(u.getIdProducto());
         txtCantidadPrestada.setText(u.getCantidadPrestada() + "");
         txtFecha.setText(formateador.format(fecha.getTime()));
-        
+
     }
-    
+
     public void personalizar_JFrame() {
         //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -37,7 +37,7 @@ public class DevolucionEquipo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -183,7 +183,7 @@ public class DevolucionEquipo extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Integer.parseInt(txtDevolver.getText()) < Integer.parseInt(txtCantidadPrestada.getText())) {
             Object[] c = OperacionesCrud.actualizarPrestamo(u, conexion, Integer.parseInt(txtDevolver.getText()));
-            if (Boolean.parseBoolean(c[0].toString())) {
+            if (Boolean.parseBoolean(c[0].toString()) && OperacionesCrud.actualizarCantidadEquipo(Integer.parseInt(txtDevolver.getText()), txtIdProducto.getText(), conexion)) {
                 int s = Integer.parseInt(c[1].toString());
                 JOptionPane.showMessageDialog(this, "DEVOLUCION CORRECTA, AUN QUEDAN " + s + " UNIDAD/ES POR DEVOLVER", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
@@ -191,7 +191,7 @@ public class DevolucionEquipo extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "ERROR: DEVOLVER PRODUCTO, ACTUALIZAR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
         } else if (Integer.parseInt(txtDevolver.getText()) == Integer.parseInt(txtCantidadPrestada.getText())) {
-            if (OperacionesCrud.eliminarPrestamo(u, conexion)) {
+            if (OperacionesCrud.actualizarCantidadEquipo(Integer.parseInt(txtDevolver.getText()), txtIdProducto.getText(), conexion) && OperacionesCrud.eliminarPrestamo(u, conexion)) {
                 JOptionPane.showMessageDialog(this, "SE HA DEVUELTO TODOS LOS EQUIPOS DE ESTE PRESTAMO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
                 this.dispose();
             } else {

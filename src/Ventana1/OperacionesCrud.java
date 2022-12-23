@@ -134,9 +134,8 @@ public class OperacionesCrud {
         try {
             String query = "select u.idusuario, u.nombre, u.apellidos, u.dni, p.idproducto, p.nombre, p.marca, p.especificacion, x.fecha, x.cantidadPrestada\n"
                     + "from usuario u, producto p, usuarios_x_producto x\n"
-                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0 and u.nombre LIKE '% ? %' or u.apellidos LIKE '% ? %';";
+                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0 and u.nombre LIKE '%" + busqueda + "%';";
             PreparedStatement ps = conexion.prepareStatement(query);
-            ps.setString(1, busqueda);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 prestamos_al.add(new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), Integer.parseInt(rs.getString(10))));
@@ -149,6 +148,21 @@ public class OperacionesCrud {
             prestamos_al = null;
         }
         return prestamos_al;
+    }
+
+    public static boolean actualizarCantidadEquipo(int c, String id, Connection conexion) {
+        boolean bandera = false;
+        try {
+            String query = "UPDATE producto set cantidad = cantidad + ? where idproducto = ?";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setInt(1, c);
+            ps.setString(2, id);
+            ps.executeUpdate();
+            bandera = true;
+        } catch (Exception e) {
+            bandera = false;
+        }
+        return bandera;
     }
 
     public static List<String> historial(Connection conexion) {
