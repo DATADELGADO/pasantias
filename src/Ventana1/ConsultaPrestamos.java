@@ -6,14 +6,16 @@ import javax.swing.JOptionPane;
 
 public class ConsultaPrestamos extends javax.swing.JFrame {
 
-    DefaultListModel dlm = new DefaultListModel();
+    static DefaultListModel dlm = new DefaultListModel();
     public static Usuariosxproducto usuario = null;
-    List<Usuariosxproducto> prestamos_al = null;
+    static List<Usuariosxproducto> prestamos_al = null;
 
     public ConsultaPrestamos() {
         initComponents();
         personalizar_JFrame();
         lstPrestamos.setModel(dlm);
+        prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
+        mostrar(prestamos_al);
     }
 
     public void personalizar_JFrame() {
@@ -24,7 +26,7 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         this.setResizable(false);
     }
 
-    public void mostrar(List<Usuariosxproducto> prestamos_al) {
+    public static void mostrar(List<Usuariosxproducto> prestamos_al) {
         dlm.clear();
         for (Usuariosxproducto x : prestamos_al) {
             String s = String.format("%-15s%-20s%-30s%-15s%-15s%-20s%-20s%-35s%-15s%5d\n", x.getIdUsuario(), x.getNombre(), x.getApellidos(), x.getDni(), x.getIdProducto(), x.getNombreProducto(), x.getMarca(), x.getEspecificacion(), x.getFecha(), x.getCantidadPrestada());
@@ -47,7 +49,6 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstPrestamos = new javax.swing.JList<>();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,13 +78,6 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         lstPrestamos.setFont(new java.awt.Font("Lucida Console", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(lstPrestamos);
 
-        jButton2.setText("MOSTRAR TODO");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
         jButton3.setText("DEVOLUCION DE EQUIPOS");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,9 +98,7 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
-                        .addComponent(jButton1)
-                        .addGap(96, 96, 96)
-                        .addComponent(jButton2))
+                        .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1551, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -123,8 +115,7 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(jButton1))
                 .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
@@ -140,21 +131,21 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
         mostrar(prestamos_al);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
-        mostrar(prestamos_al);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
     private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
 
     }//GEN-LAST:event_txtNombreActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int indice = lstPrestamos.getSelectedIndex();
-        usuario = prestamos_al.get(indice);
-        if (usuario != null) {
-            new DevolucionEquipo().setVisible(true);
-        } else {
+        try {
+            int indice = lstPrestamos.getSelectedIndex();
+            usuario = prestamos_al.get(indice);
+
+            if (usuario != null) {
+                new DevolucionEquipo().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "ERROR: ELEMENTO VACIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "ERROR: SELECCIONE UN ELEMENTO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
@@ -196,7 +187,6 @@ public class ConsultaPrestamos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

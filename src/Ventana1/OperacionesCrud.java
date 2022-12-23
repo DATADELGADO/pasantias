@@ -134,7 +134,7 @@ public class OperacionesCrud {
         try {
             String query = "select u.idusuario, u.nombre, u.apellidos, u.dni, p.idproducto, p.nombre, p.marca, p.especificacion, x.fecha, x.cantidadPrestada\n"
                     + "from usuario u, producto p, usuarios_x_producto x\n"
-                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0 and u.nombre = ?;";
+                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and x.cantidadPrestada > 0 and u.nombre LIKE '% ? %' or u.apellidos LIKE '% ? %';";
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setString(1, busqueda);
             ResultSet rs = ps.executeQuery();
@@ -234,7 +234,7 @@ public class OperacionesCrud {
         boolean bandera = false;
         int s = x.getCantidadPrestada() - cantidad;
         try {
-            String query = "UPDATE usuarios_x_producto set cantidadPrestada = cantidadPrestada - ? where idproducto = ? and idusuario = ?;";
+            String query = "UPDATE usuarios_x_producto set cantidadPrestada = cantidadPrestada - ? where idproducto = ? and idusuario = ?";
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setInt(1, cantidad);
             ps.setString(2, x.getIdProducto());
@@ -244,6 +244,7 @@ public class OperacionesCrud {
         } catch (Exception e) {
             bandera = false;
         }
+        System.out.println(bandera);
         Object[] c = {bandera, s};
         return c;
     }

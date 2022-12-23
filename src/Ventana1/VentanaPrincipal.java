@@ -27,7 +27,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
         this.getContentPane().setBackground(Color.CYAN);
-
     }
 
     @SuppressWarnings("unchecked")

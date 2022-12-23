@@ -5,19 +5,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class DevolucionEquipo extends javax.swing.JFrame {
-
+    
     static Usuariosxproducto u = null;
     Connection conexion = Ventana_login.conexion;
-
+    
     public DevolucionEquipo() {
         initComponents();
         personalizar_JFrame();
         cargarCampos();
     }
-
+    
     public void cargarCampos() {
         u = ConsultaPrestamos.usuario;
         DateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
@@ -26,9 +27,9 @@ public class DevolucionEquipo extends javax.swing.JFrame {
         txtIdProducto.setText(u.getIdProducto());
         txtCantidadPrestada.setText(u.getCantidadPrestada() + "");
         txtFecha.setText(formateador.format(fecha.getTime()));
-
+        
     }
-
+    
     public void personalizar_JFrame() {
         //this.setIconImage(Toolkit.getDefaultToolkit().createImage(VentanaPrincipal.class.getResource("w2.jpg")));
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -36,7 +37,7 @@ public class DevolucionEquipo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setResizable(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -181,21 +182,26 @@ public class DevolucionEquipo extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (Integer.parseInt(txtDevolver.getText()) < Integer.parseInt(txtCantidadPrestada.getText())) {
-            if (Boolean.parseBoolean(OperacionesCrud.actualizarPrestamo(u, conexion, Integer.parseInt(txtDevolver.getText()))[0].toString())) {
-                int s = Integer.parseInt(OperacionesCrud.actualizarPrestamo(u, conexion, Integer.parseInt(txtDevolver.getText()))[1].toString());
+            Object[] c = OperacionesCrud.actualizarPrestamo(u, conexion, Integer.parseInt(txtDevolver.getText()));
+            if (Boolean.parseBoolean(c[0].toString())) {
+                int s = Integer.parseInt(c[1].toString());
                 JOptionPane.showMessageDialog(this, "DEVOLUCION CORRECTA, AUN QUEDAN " + s + " UNIDAD/ES POR DEVOLVER", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "ERROR: DEVOLVER PRODUCTO, ACTUALIZAR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
         } else if (Integer.parseInt(txtDevolver.getText()) == Integer.parseInt(txtCantidadPrestada.getText())) {
             if (OperacionesCrud.eliminarPrestamo(u, conexion)) {
                 JOptionPane.showMessageDialog(this, "SE HA DEVUELTO TODOS LOS EQUIPOS DE ESTE PRESTAMO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+                this.dispose();
             } else {
                 JOptionPane.showMessageDialog(this, "ERROR: DEVOLVER PRODUCTO, ELIMINAR", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
             }
         } else if (Integer.parseInt(txtDevolver.getText()) > Integer.parseInt(txtCantidadPrestada.getText())) {
             JOptionPane.showMessageDialog(this, "ERROR: LA CANTIDAD A DEVOLVER DEBE SER IGUAL O MENOR QUE LA CANTIDAD PRESTADA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
+        List<Usuariosxproducto> prestamos_al = OperacionesCrud.mostrarPrestamos(VentanaPrincipal.conexion);
+        ConsultaPrestamos.mostrar(prestamos_al);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
