@@ -95,7 +95,7 @@ public class OperacionesCrud {
         try {
             PreparedStatement ps = conexion.prepareStatement(query);
             ps.setString(1, producto.getIdProducto());
-            ps.setString(2, producto.getNombre());
+            ps.setString(2, producto.getNombreProducto());
             ps.setString(3, producto.getMarca());
             ps.setString(4, producto.getEspecificacion());
             ps.setInt(5, producto.getCantidad());

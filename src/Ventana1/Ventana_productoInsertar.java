@@ -148,7 +148,7 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
         Producto producto = new Producto(txtIdProducto.getText(), txtNombre.getText(), txtMarca.getText(), txtEspecificacion.getText(), Integer.parseInt(txtCantidad.getText()));
         if (OperacionesCrud.insertarEquipo(producto, VentanaPrincipal.conexion)) {
             JOptionPane.showMessageDialog(this, "EQUIPO INSERTADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-
+            this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "ERROR: INSERTAR EQUIPO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
