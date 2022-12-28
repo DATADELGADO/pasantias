@@ -31,11 +31,10 @@ public class VentanaProductosUsuario extends javax.swing.JFrame {
     public static void cargarProductos() {
         dlm.clear();
         productos_al = OperacionesCrud.mostrarTodoMateriales(conexion);
-            for (Producto p : productos_al) {
-                String s = String.format("%-15s%-22s%-18s%15s%8d\n", p.getIdProducto(), p.getNombreProducto(), p.getMarca(), p.getEspecificacion(), p.getCantidad());
-                dlm.addElement(s);
-            }
-  
+        for (Producto p : productos_al) {
+            String s = String.format("%-5s%-20s%-20s%-45s%3d\n", p.getIdProducto(), p.getNombreProducto(), p.getMarca(), p.getEspecificacion(), p.getCantidad());
+            dlm.addElement(s);
+        }
     }
 
     @SuppressWarnings("unchecked")
@@ -43,7 +42,6 @@ public class VentanaProductosUsuario extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jScrollPane2 = new javax.swing.JScrollPane();
         lstEquipos = new javax.swing.JList<>();
@@ -56,13 +54,6 @@ public class VentanaProductosUsuario extends javax.swing.JFrame {
         jLabel1.setText("EQUIPOS");
         jLabel1.setOpaque(true);
 
-        jButton1.setText("VISUALIZAR PRESTAMO");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         lstEquipos.setFont(new java.awt.Font("Lucida Console", 0, 14)); // NOI18N
         jScrollPane2.setViewportView(lstEquipos);
 
@@ -74,13 +65,8 @@ public class VentanaProductosUsuario extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(606, 606, 606)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(218, 218, 218)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1068, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(221, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,28 +75,11 @@ public class VentanaProductosUsuario extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(86, 86, 86)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        try {
-
-            int indice = lstEquipos.getSelectedIndex();
-            String[] camposP = dlm.get(indice).toString().replaceAll("[\\s]+", " ").trim().split(" ");
-            String idProducto = camposP[0];
-            ids[0] = Ventana_login.idUsuario;
-            ids[1] = idProducto;
-            new PrestamoFinalUsuario().setVisible(true);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "ERROR: SELECCION INCOMPLETA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +120,6 @@ public class VentanaProductosUsuario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

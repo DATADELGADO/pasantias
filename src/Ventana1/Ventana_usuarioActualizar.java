@@ -36,7 +36,8 @@ public class Ventana_usuarioActualizar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cmdActualizar.setBackground(new java.awt.Color(51, 255, 0));
-        cmdActualizar.setText("ACTUALIZAR USUARIO");
+        cmdActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-actualizar-30.png"))); // NOI18N
+        cmdActualizar.setText("  ACTUALIZAR USUARIO");
         cmdActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdActualizarActionPerformed(evt);
@@ -102,10 +103,10 @@ public class Ventana_usuarioActualizar extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(48, 48, 48)))
                 .addGap(60, 60, 60))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(348, 348, 348)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmdActualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(282, 282, 282))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,9 +124,9 @@ public class Ventana_usuarioActualizar extends javax.swing.JFrame {
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtApellidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
+                .addGap(36, 36, 36)
                 .addComponent(cmdActualizar)
-                .addContainerGap(68, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();

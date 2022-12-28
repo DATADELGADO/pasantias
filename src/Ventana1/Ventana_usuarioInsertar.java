@@ -69,7 +69,8 @@ public class Ventana_usuarioInsertar extends javax.swing.JFrame {
         jLabel5.setOpaque(true);
 
         cmdRegistrar.setBackground(new java.awt.Color(51, 255, 0));
-        cmdRegistrar.setText("REGISTRAR USUARIO");
+        cmdRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-añadir-usuario-tipo-de-piel-masculina-7-30.png"))); // NOI18N
+        cmdRegistrar.setText("  REGISTRAR USUARIO");
         cmdRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdRegistrarActionPerformed(evt);
@@ -107,10 +108,10 @@ public class Ventana_usuarioInsertar extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addGap(48, 48, 48)))
                 .addGap(60, 60, 60))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(348, 348, 348)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cmdRegistrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(322, 322, 322))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,7 +131,7 @@ public class Ventana_usuarioInsertar extends javax.swing.JFrame {
                     .addComponent(txtDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(cmdRegistrar)
-                .addContainerGap(246, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
         );
 
         pack();

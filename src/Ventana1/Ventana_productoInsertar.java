@@ -37,7 +37,8 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cmdRegistrar.setBackground(new java.awt.Color(51, 255, 0));
-        cmdRegistrar.setText("REGISTRAR EQUIPO");
+        cmdRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-monitor-50.png"))); // NOI18N
+        cmdRegistrar.setText("  REGISTRAR EQUIPO");
         cmdRegistrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdRegistrarActionPerformed(evt);
@@ -137,7 +138,7 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addComponent(cmdRegistrar)
-                .addContainerGap(67, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();

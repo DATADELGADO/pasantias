@@ -165,8 +165,8 @@ public class OperacionesCrud {
         return bandera;
     }
 
-    public static List<String> historial(Connection conexion) {
-        List<String> historial_al = new ArrayList<String>();
+    public static List<Usuariosxproducto> historial(Connection conexion) {
+        List<Usuariosxproducto> historial_al = new ArrayList<Usuariosxproducto>();
         try {
             String query = "select u.idusuario, u.nombre, u.apellidos, u.dni, p.idproducto, p.nombre, p.marca, p.especificacion, x.fecha, x.cantidadPrestada\n"
                     + "from usuario u, producto p, usuarios_x_producto x\n"
@@ -175,15 +175,32 @@ public class OperacionesCrud {
             PreparedStatement ps = conexion.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                String fila = "" + rs.getString(1) + "   " + rs.getString(2) + "   " + rs.getString(3) + "   " + rs.getString(4) + "   " + rs.getString(5) + "   " + rs.getString(6) + "   " + rs.getString(7) + "   " + rs.getString(8) + "   " + rs.getString(9) + "   " + rs.getString(10);
-                historial_al.add(fila);
-                System.out.println(fila);
+                historial_al.add(new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), Integer.parseInt(rs.getString(10))));
+
             }
 
         } catch (Exception e) {
 
         }
         return historial_al;
+    }
+
+    public static List<Usuariosxproducto> mostrarHistorialUsuario(Connection conexion, String id) {
+        List<Usuariosxproducto> prestamos_al = new ArrayList<Usuariosxproducto>();
+        try {
+            String query = "select u.idusuario, u.nombre, u.apellidos, u.dni, p.idproducto, p.nombre, p.marca, p.especificacion, x.fecha, x.cantidadPrestada\n"
+                    + "from usuario u, producto p, usuarios_x_producto x\n"
+                    + "where u.idusuario = x.idusuario and x.idproducto = p.idproducto and u.idusuario = ? order by x.fecha desc;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                prestamos_al.add(new Usuariosxproducto(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), Integer.parseInt(rs.getString(10))));
+            }
+        } catch (Exception e) {
+            prestamos_al = null;
+        }
+        return prestamos_al;
     }
 
     public static List<Usuario> mostrarTodo(Connection conexion) {
@@ -447,5 +464,44 @@ public class OperacionesCrud {
             u = null;
         }
         return u;
+    }
+
+    public static String[] configuracionCuenta(Connection conexion, String id) {
+        String[] usuario = null;
+        try {
+            String query = "select u.nombre, u.apellidos, u.dni, l.correo, l.ciudad\n"
+                    + "from usuario u, login l\n"
+                    + "where u.idusuario = l.idusuario and u.idusuario = ?;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String[] susuario = {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)};
+                usuario = susuario;
+            }
+        } catch (Exception e) {
+            usuario = null;
+        }
+        return usuario;
+    }
+
+    public static boolean actualizarUsuarioConfiguracion(Connection conexion, String[] u, String id) {
+        boolean bandera = false;
+        try {
+            String query = "update usuario u, login l set u.nombre = ?, u.apellidos= ?, u.dni= ?, l.correo= ?, l.ciudad = ? where u.idusuario = l.idusuario and u.idusuario = ?;";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ps.setString(1, u[0]);
+            ps.setString(2, u[1]);
+            ps.setString(3, u[2]);
+            ps.setString(4, u[3]);
+            ps.setString(5, u[4]);
+            ps.setString(6, id);
+            ps.executeUpdate();
+            bandera = true;
+        } catch (Exception e) {
+            bandera = false;
+        }
+        return bandera;
     }
 }

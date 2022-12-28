@@ -69,7 +69,8 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         jLabel1.setOpaque(true);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("NUEVO USUARIO");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-añadir-usuario-tipo-de-piel-masculina-7-30.png"))); // NOI18N
+        jButton1.setText("  NUEVO USUARIO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,7 +78,8 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         });
 
         jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("ELIMINAR USUARIO");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-borrar-para-siempre-30.png"))); // NOI18N
+        jButton2.setText("  ELIMINAR USUARIO");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -85,14 +87,16 @@ public class VentanaUsuarios extends javax.swing.JFrame {
         });
 
         jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("ACTUALIZAR USUARIO");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-actualizar-30.png"))); // NOI18N
+        jButton3.setText("  ACTUALIZAR USUARIO");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
 
-        jButton5.setText("MOSTRAR USUARIOS");
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/mostrar_todosusuarios.png"))); // NOI18N
+        jButton5.setText("  MOSTRAR USUARIOS");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
@@ -140,6 +144,13 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                         .addComponent(jButton5)
                         .addGap(482, 482, 482))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton1)
+                        .addGap(46, 46, 46)
+                        .addComponent(jButton2)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton3)
+                        .addGap(232, 232, 232))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -149,16 +160,7 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(93, 93, 93)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1)
-                                    .addGap(46, 46, 46)
-                                    .addComponent(jButton2)
-                                    .addGap(50, 50, 50)
-                                    .addComponent(jButton3)
-                                    .addGap(41, 41, 41))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(247, 247, 247))))
         );
         layout.setVerticalGroup(
@@ -175,12 +177,12 @@ public class VentanaUsuarios extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3)
                     .addComponent(jButton2)
                     .addComponent(jButton1))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
@@ -192,46 +194,53 @@ public class VentanaUsuarios extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
 
-            cargarUsuarios();
-            try {
-                for (Usuario u : usuarios_al) {
-                    String s = String.format("%-15s%-18s%-25s%-15s\n", u.getIdUsuario(), u.getNombre(), u.getApellidos(), u.getDni());
-                    dlm.addElement(s);
-                }
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, "ERROR: LISTA VACIA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        cargarUsuarios();
+        try {
+            for (Usuario u : usuarios_al) {
+                String s = String.format("%-15s%-18s%-25s%-15s\n", u.getIdUsuario(), u.getNombre(), u.getApellidos(), u.getDni());
+                dlm.addElement(s);
             }
-      
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "ERROR: LISTA VACIA", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
+
 
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         //cargarUsuarios();
         int[] indices = lstUsuarios.getSelectedIndices();
-        boolean bandera = false;
-        int contador = 0;
-        for (int i : indices) {
-            String[] campo = dlm.get(i).toString().replaceAll("[\\s]+", " ").trim().split(" ");
-            if (OperacionesCrud.eliminarUsuario(conexion, campo[0])) {
-                bandera = true;
-                dlm.removeElementAt(i);
-                contador++;
-            } else {
-                JOptionPane.showMessageDialog(this, "ERROR: ELIMINAR, ESTE USUARIO TIENE EQUIPOS PRESTADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        if (indices.length > 0) {
+            boolean bandera = false;
+            int contador = 0;
+            for (int i : indices) {
+                String[] campo = dlm.get(i).toString().replaceAll("[\\s]+", " ").trim().split(" ");
+                if (OperacionesCrud.eliminarUsuario(conexion, campo[0])) {
+                    bandera = true;
+                    dlm.removeElementAt(i);
+                    contador++;
+                } else {
+                    JOptionPane.showMessageDialog(this, "ERROR: ELIMINAR, ESTE USUARIO TIENE EQUIPOS PRESTADOS", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
 
+                }
             }
-        }
-        if (bandera) {
-            JOptionPane.showMessageDialog(this, "OK: ELIMINADO/S " + contador + " USUARIO/S", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-
+            if (bandera) {
+                JOptionPane.showMessageDialog(this, "OK: ELIMINADO/S " + contador + " USUARIO/S", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "DEBE SELECCION UN USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        int indice = lstUsuarios.getSelectedIndex();
-        String[] campo = dlm.get(indice).toString().replaceAll("[\\s]+", " ").trim().split(" ");
-        idUsuario = campo[0];
-        new Ventana_usuarioActualizar().setVisible(true);
+        try {
+            int indice = lstUsuarios.getSelectedIndex();
+            String[] campo = dlm.get(indice).toString().replaceAll("[\\s]+", " ").trim().split(" ");
+            idUsuario = campo[0];
+            new Ventana_usuarioActualizar().setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "DEBE SELECCIONAR UN USUARIO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

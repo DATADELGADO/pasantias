@@ -35,21 +35,24 @@ public class PrestamoPrincipal extends javax.swing.JFrame {
         jLabel2.setText("PRESTAMO");
         jLabel2.setOpaque(true);
 
-        jButton1.setText("NUEVO PRESTAMO");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-por-nueva-copia-30.png"))); // NOI18N
+        jButton1.setText("  NUEVO PRESTAMO");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("CONSULTAR TODOS LOS PRESTAMOS");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-pregunta-30.png"))); // NOI18N
+        jButton2.setText("  CONSULTAR TODOS LOS PRESTAMOS");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
 
-        jButton3.setText("HISTORIAL");
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Ventana1/fotos/icons8-historia-de-la-actividad-30.png"))); // NOI18N
+        jButton3.setText("  HISTORIAL");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
@@ -83,7 +86,7 @@ public class PrestamoPrincipal extends javax.swing.JFrame {
                 .addComponent(jButton2)
                 .addGap(18, 18, 18)
                 .addComponent(jButton3)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
