@@ -71,6 +71,30 @@ public class OperacionesCrud {
         return usuarioAuto;
     }
 
+    public static String retornaIdproductoAutomatico(Connection conexion) {
+        String id = "";
+        try {
+            String query = "SELECT IDPRODUCTO FROM PRODUCTO ORDER BY IDPRODUCTO DESC LIMIT 1";
+            PreparedStatement ps = conexion.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                String x = rs.getString(1);
+                String a = "";
+                for (int i = 0; i < x.length(); i++) {
+                    if (i != 0) {
+                        a = a + x.charAt(i);
+                    }
+                }
+                int n = Integer.parseInt(a) + 1;
+                id = x.charAt(0) + "" + n;
+            }
+        } catch (Exception e) {
+
+        }
+        return id;
+
+    }
+
     public static boolean insertar(Usuario usuario, Connection conexion) {
         boolean bandera = false;
         String query = "INSERT INTO USUARIO(idUsuario,nombre,apellidos,dni) VALUES(?,?,?,?)";

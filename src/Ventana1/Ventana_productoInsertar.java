@@ -7,6 +7,7 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
     public Ventana_productoInsertar() {
         initComponents();
         personalizar_JFrame();
+        txtIdProducto.setText(OperacionesCrud.retornaIdproductoAutomatico(Ventana_login.conexion));
     }
 
     public void personalizar_JFrame() {
@@ -15,6 +16,14 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
         this.setTitle("ACTUALIZANDO USUARIO");
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+    }
+
+    public void limpiar() {
+        txtIdProducto.setText(OperacionesCrud.retornaIdproductoAutomatico(Ventana_login.conexion));
+        txtNombre.setText("");
+        txtMarca.setText("");
+        txtEspecificacion.setText("");
+        txtCantidad.setText("");
     }
 
     @SuppressWarnings("unchecked")
@@ -56,6 +65,8 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("NUEVO PRODUCTO");
         jLabel1.setOpaque(true);
+
+        txtIdProducto.setEnabled(false);
 
         jLabel2.setBackground(new java.awt.Color(0, 0, 0));
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -149,7 +160,7 @@ public class Ventana_productoInsertar extends javax.swing.JFrame {
         Producto producto = new Producto(txtIdProducto.getText(), txtNombre.getText(), txtMarca.getText(), txtEspecificacion.getText(), Integer.parseInt(txtCantidad.getText()));
         if (OperacionesCrud.insertarEquipo(producto, VentanaPrincipal.conexion)) {
             JOptionPane.showMessageDialog(this, "EQUIPO INSERTADO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
-            this.dispose();
+            limpiar();
         } else {
             JOptionPane.showMessageDialog(this, "ERROR: INSERTAR EQUIPO", "INFORMACION", JOptionPane.INFORMATION_MESSAGE);
         }
